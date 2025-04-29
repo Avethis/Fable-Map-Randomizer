@@ -1,6 +1,6 @@
-v1.0
+v1.1
 
-This is the official release. Includes the new one way map randomizer, logic to keep dead end maps from having their own entrance within themselves, and a cheat sheet.
+Adds popups for install errors and successes. Adds a .exe
 
 Coming soon:
 

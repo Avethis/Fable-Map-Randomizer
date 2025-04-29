@@ -3,6 +3,8 @@
 import sys, getopt
 import os, os.path
 import re
+import tkinter as tk
+from tkinter import messagebox
 from random import choice
 from uid import Uid
 from loadMapFile import loadMapFile
@@ -22,7 +24,7 @@ def captureClp(argv):
     try:
         opts, args = getopt.getopt(argv, "hm:t:", ["mapfile=", "targetDir="])
     except getopt.GetoptError:
-        printHelp()
+        errorPopup("oops", "something bad happened. ask ave")
         sys.exit(2)
     for opt, arg in opts:
         if opt == "-h":
@@ -30,7 +32,7 @@ def captureClp(argv):
             sys.exit()
         elif opt in ("-m", "--mapfile"):
             map_file = arg
-            print("Map file is {}".format(map_file))
+#            print("Map file is {}".format(map_file))
         elif opt in ("-t", "--targetDir"):
             target_dir = arg
             print("Target file is {}".format(target_dir))
@@ -38,14 +40,12 @@ def captureClp(argv):
 
 def validateClp():
     if not map_file:
-        print("Map file is required")
-        printHelp()
+        errorPopup("error", "error")
         sys.exit(-1)
     else:
         validateFile(map_file)
     if not target_dir:
-        print("Target file is required")
-        printHelp()
+        errorPopup("error", "error")
         sys.exit(-1)
     else:
         validateDir(target_dir)
@@ -68,13 +68,13 @@ def cleanUp():
 
 def validateDir(dir_name):
     if not os.path.isdir(dir_name):
-        print("{} is not a valid dirrectory".format(dir_name))
+        errorPopup("Invalid Directory", f"{dir_name} folder isn't here. Rename your FinalAlbion folder to TNGS.")
         sys.exit(-1)
 
 
 def validateFile(file_name):
     if not os.path.isfile(file_name):
-        print("Could not access file {}".format(file_name))
+        errorPopup("File Not Found", f"Could not access the file {file_name}. The UID lists are missing. Make sure you're running this in the mod folder.")
         sys.exit(-1)
 
 
@@ -89,10 +89,13 @@ def processTargetDir():
 
 
 def processTargetFile(target_dir, file):
+    final_albion_dir = os.path.join(target_dir, "FinalAlbion")
+    if not os.path.exists(final_albion_dir):
+        os.makedirs(final_albion_dir)
     target_file = os.path.join(target_dir, file)
     out_file_name = os.path.join(target_dir, "FinalAlbion", file)
     out_file = open(out_file_name, "w")
-    print("Processing {}, output file is {}".format(target_file, out_file_name))
+#    print("Processing {}, output file is {}".format(target_file, out_file_name))
     in_file = open(target_file, "r")
 
     lines = in_file.read().splitlines()
@@ -154,6 +157,18 @@ def buildMap():
         uid_substitutions.get(uid.game_map).add(replacement.game_map)
         spent_uids.add(replacement.name)
 
+def successPopup():
+    root = tk.Tk()
+    root.withdraw()  #
+    messagebox.showinfo("Execution Complete", "Successfully randomized. Copy the FinalAlbion folder within TNGS back into Levels.")
+    root.destroy()
+
+def errorPopup(title, message):
+    root = tk.Tk()
+    root.withdraw()
+    messagebox.showerror(title, message)
+    root.destroy()
+
 def main(argv):
     global uids
     global uid_substitutions
@@ -163,6 +178,8 @@ def main(argv):
     uids, uid_substitutions = loadMapFile(map_file)
     buildMap()
     processTargetDir()
+    successPopup()
+    
 
 
 if __name__ == "__main__":

@@ -28,7 +28,7 @@ def processLine(line):
         uid = tryPartialMatch(line)
     if uid is None:
         return
-    print("Loaded {}".format(str(uid)))
+#    print("Loaded {}".format(str(uid)))
     uids[uid.name] = uid
     uid_substitutions[uid.game_map] = set()
 
