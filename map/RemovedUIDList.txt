@@ -1,0 +1,10 @@
+UID 197244689441620753 GameMap ProphetsChamber OppositeDoor 1627279408131735966 NeverBe 1627279408131735966 #ProphetsChamber->LookoutPoint
+UID 1627279408131735966 GameMap LookoutPoint OppositeDoor 197244689441620753 #LookoutPoint->ProphetsChamber
+UID 677350839756524586 GameMap GuildWoods OppositeDoor 3831949755403993091 NeverBe 3831949755403993091 #GuildWoods->HeroesGuild
+UID 3831949755403993091 GameMap HeroesGuild OppositeDoor 677350839756524586 #HeroesGuild->GuildWoods
+UID 1056628475269480455 GameMap TheHallOfHeroes OppositeDoor 3360463776250855440 #TheHallOfHeroes->ArenaEntrance
+UID 3360463776250855440 GameMap ArenaEntrance OppositeDoor 1056628475269480455 #ArenaEntrance->TheHallOfHeroes
+UID 3360463776250856168 GameMap ArenaAnteroom OppositeDoor 423546172670476294 #ArenaAnteroom->TheHallOfHeroes
+UID 423546172670476294 GameMap TheHallOfHeroes OppositeDoor 3360463776250856168 #TheHallOfHeroes->ArenaAnteroom
+UID 423546172670476335 GameMap TheArena OppositeDoor 654383141363908646 NeverBe 654383141363908646 #TheArena->ArenaAnteroom
+UID 654383141363908646 GameMap ArenaAnteroom OppositeDoor 423546172670476335 #ArenaAnteroom->TheArena

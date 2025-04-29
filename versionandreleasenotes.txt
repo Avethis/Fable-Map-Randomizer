@@ -1,0 +1,9 @@
+v1.0
+
+This is the official release. Includes the new one way map randomizer, logic to keep dead end maps from having their own entrance within themselves, and a cheat sheet.
+
+Coming soon:
+
+Region exit points behind demon doors can be active constantly (toggleable)
+Doors that aren't always targetable can be targetable constantly, eg. Bowerstone Manor, Tavern Cellar, Bordello, etc. (toggleable) 
+A more readable, explicit cheat sheet.
